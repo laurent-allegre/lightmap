@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le rôle d'un formateur {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Modifier le rôle d'un formateur </h1>
+        {{ form(formateurForm) }}
+        <a href="{{ path('admin_formateurs') }}" class="btn btn-info">Retour à la liste</a>
+    </div>
+
+{% endblock %}
+
+

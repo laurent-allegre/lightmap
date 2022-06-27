@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - Lightmap!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+    <h1 class="parcoursh1 display-1">Gestion des parcours ! </h1>
+        <h2 class="parcoursh2">Bienvenue {{ app.user.prenom}} : </h2>
+        <h3 class="parcoursh3">dans votre page personnel.<br> Vous allez pouvoir gérer toutes vos formations .</h3>
+        <h4 class="parcoursh3">Vous pouvez aussi modifier votre  mot de passe ici :<a class="btn btn-info btn-sm" href="{{ path('app_account_password')}}">Modifier</a></h4>
+    <hr>
+        <!-- Trois colonnes de card -->
+        <div class="row p-2">
+            <div class="col-lg-4 cardsParcours">
+                <a target="_self" href="{{ path('app_parcours_ajouter') }}" class="imgButton one">
+                    <img src="{{ asset('assets/images/icons8-ajouter-le-dossier-96.png') }}" class="rounded-circle" alt="Logo ajouter un parcours" width="250" height="250" alt="ajouter un parcours"></a>
+                <h3 class="parcoursh3">Ajouter un parcours</h3>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4 cardsParcours">
+                <a target="_self" href="{{ path('app_parcours_liste') }}" class="imgButton two">
+                    <img class="rounded-circle" src="{{ asset('assets/images/icons8-dossier-ouvert-96.png') }}" alt="Logo Liste des parcours" width="250" height="250" alt="Liste des parcours"></a>
+                <h3 class="parcoursh3">Liste des parcours</h3>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4 cardsParcours">
+                <a target="_self" href="#" class="imgButton three">
+                    <img class="rounded-circle" src="{{ asset('assets/images/icons8-dossier-96.png') }}" alt="Logo Modifier un parcours" width="250" height="250" alt="Modifier un parcours"></a>
+                <h3 class="parcoursh3">Modifier un parcours</h3>
+            </div>
+            <!-- /.col-lg-4 -->
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="row">
+                <div class="col-lg-4 cardsParcours">
+                    <a target="_self" href="{{path('admin_formateurs')}}" class="imgButton four">
+                        <img class="rounded-circle" src="{{ asset('assets/images/assurance-qualite.png') }}" alt="Logo modifier un formateur" width="250" height="250" alt="modifier un formateur"></a>
+                    <h3 class="parcoursh3">Modifier le rôle des formateurs</h3>
+                </div>
+            </div>
+            {% endif %}
+
+
+        </div>
+        <!-- /.row -->
+
+</div>
+{% endblock %}

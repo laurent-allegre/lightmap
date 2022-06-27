@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter - Lightmap !{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <div class="container-fluid ps-md-0">
+            <div class="row g-0">
+                <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="login d-flex align-items-center py-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-8 mx-auto">
+                                    <h3 class="login-heading mb-4">Accéder à votre compte !</h3>
+
+                                    <!-- Sign In Form -->
+
+                                        <div class="form-floating mb-3">
+                                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                            <label for="floatingInput">Votre émail</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                                            <label for="floatingPassword">Votre mot de passe</label>
+                                        </div>
+
+
+
+                                        <div class="d-grid">
+                                            <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Se connecter</button>
+                                        </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
+
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
+
+

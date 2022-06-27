@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Séquences Position initial | LightMap {% endblock %}
+
+
+{% block body %}
+
+    {{ form_start(formInitial) }}
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="{{ asset('assets/images/logo1.png') }}" alt="logo de lightmap"/>
+                <h3 class="titreH3">LightMap</h3>
+                <p>Création d'une nouvelle séquence de posionnement initial.</p>
+                <!-- Nom du parcours en cours -->
+                <div class="text-center my-2">
+                    <p class="parcoursh4"> <small>pour le parcours :</small>  "{{ parcours.nomParcours }}" | <br> <small>Nom de l'entreprise </small>"{{ parcours.nomEntreprise }}"</p>
+                </div>
+            </div>
+            <div class="col-md-9 register-right">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bonjour</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Création d'une nouvelle séquence de posionnement initial :</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6 col-xl-10">
+                                <div class="form-group">
+                                    {{ form_label(formInitial.nom) }}
+                                    {{ form_widget(formInitial.nom) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formInitial.contexte) }}
+                                    {{ form_widget(formInitial.contexte) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formInitial.dateDebut) }}
+                                    {{ form_widget(formInitial.dateDebut) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formInitial.heureDebut) }}
+                                    {{ form_widget(formInitial.heureDebut) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formInitial.dateFin) }}
+                                    {{ form_widget(formInitial.dateFin) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formInitial.heureFin) }}
+                                    {{ form_widget(formInitial.heureFin) }}
+                                </div>
+
+                                <hr>
+                                <div class="form-group">
+                                    <p>Pré-requis:</p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="prerequis-list"
+                                        data-index="{{ formInitial.preRequis|length > 0 ? formInitial.preRequis|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(formInitial.preRequis.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary" data-collection-holder-class="prerequis-list">Ajouter un prérequis</button>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="form-group">
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <p>Objectifs Pédagogiques / Compétences Cibles :</p>
+                                    <ul class="objectifs-list"
+                                        data-index="{{ formInitial.objectifCompetences|length > 0 ? formInitial.objectifCompetences|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(formInitial.objectifCompetences.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary" data-collection-holder-class="objectifs-list">Ajouter un objectif</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="mt-3 text-center">
+                                    <input type="submit" class="btn btn-success"  value="Validation de la séquence"/>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    {{ form_end(formInitial)}}
+
+
+    {% block javascripts %}
+        {# Ajout d'une ligne pre_requis #}
+        <script>
+            const addFormToCollection = (e) => {
+                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                const item = document.createElement('li');
+
+                item.innerHTML = collectionHolder
+                    .dataset
+                    .prototype
+                    .replace(
+                        /__name__/g,
+                        collectionHolder.dataset.index
+                    );
+
+                collectionHolder.appendChild(item);
+
+                collectionHolder.dataset.index++;
+
+                //  A refaire à chaque création de prérequis
+                addTagFormDeleteLink(item);
+            };
+
+            document
+                .querySelectorAll('.add_item_link')
+                .forEach(btn => {
+                    btn.addEventListener("click", addFormToCollection)
+                });
+        </script>
+
+        {# Suppresion d'une ligne pre_requis/objetifs #}
+        <script>
+
+            const addTagFormDeleteLink = (item) => {
+                const removeFormButton = document.createElement('button');
+                removeFormButton.innerText = 'Annuler';
+
+                item.append(removeFormButton);
+
+                removeFormButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // remove the li for the tag form
+                    item.remove();
+                });
+            }
+        </script>
+    {% endblock %}
+
+{% endblock %}
+
+
+
+
+
+
+
+

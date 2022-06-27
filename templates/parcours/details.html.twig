@@ -1,0 +1,333 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}lightmap | détails d'un parcours {% endblock %}
+
+{% block body %}
+
+
+    <div class="container mt-3">
+        <h1 class="parcoursh1 display-1"> <small>Nom du parcours :</small>  {{ parcour.nomParcours }}</h1>
+        <p class="parcoursh3"> <small>Entreprise:</small> {{ parcour.nomEntreprise }} --- <small>Apprenant:</small> {{ parcour.nomApprenant }} {{ parcour.prenomApprenant }}</p>
+        <hr>
+        <div class="row">
+            <div class="table-responsive">
+                {# AFFICHAGE DE LA SEQUENCE POSIONNEMENT INITIAL #}
+                <table class="table bg-light border border-secondary">
+                    <h4 class="text-uppercase text-decoration-underline text-primary fw-bold">Séquence de positionnement initial :</h4>
+                    <thead>
+                        <th>Nom de la séquence</th>
+                        <th>Contexte</th>
+                        <th>Date de début</th>
+                        <th>Heure de début</th>
+                        <th>Date de Fin</th>
+                        <th>Heure de fin</th>
+                    </thead>
+                    <tbody>
+
+                        {# On boucle sur toutes les séquences de positionnement initial #}
+                        {% if (parcour.spositionInitials.count() > 0) %}
+                            {% for sequence in parcour.spositionInitials %}
+                                <tr>
+                                    <td>{{ sequence.nom}}</td>
+                                    <td>{{ sequence.contexte}}</td>
+                                    <td>{{ sequence.dateDebut.format("d/m/Y") }}</td>
+                                    <td>{{ sequence.heureDebut.format("H:i") }}</td>
+                                    <td>{{ sequence.dateFin.format("d/m/Y") }}</td>
+                                    <td>{{ sequence.heureFin.format("H:i") }}</td>
+                                    <td>
+                                        <a href="{{ path('app_sequence_initial_modifier', {'id': sequence.id }) }}" class="btn btn-info">Editer</a>
+                                    </td>
+                                </tr>
+
+                                {# On boucle sur tout les prérequis #}
+                                    <thead>
+                                        <th>Prérequis total : <small>{{ sequence.preRequis.count() }}</small> </th>
+                                    </thead>
+                                {%  for prerequis in sequence.preRequis %}
+                                    <tbody>
+                                        <td> . {{ prerequis.libellerRequis }}</td>
+                                    </tbody>
+                                {%  endfor %}
+
+                               {# On boucle sur tout les objectifs #}
+                                    <thead>
+                                        <th>Ojectifs total : <small>{{ sequence.objectifCompetences.count() }}</small> </th>
+                                    </thead>
+                               {% for objectif in sequence.objectifCompetences%}
+                                   <tbody>
+                                         <td> . {{ objectif.libellerObjectif }}</td>
+                                   </tbody>
+                               {% endfor%}
+
+                            {% endfor %} {# fin de la boucle des séquences initial #}
+
+                             {% else %}
+                                <tr>
+                                    <td class="colspan=5">Il n'y as pas de séquence inscrite.</td>
+                                </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+            <br>
+        <div class="row">
+            <div class="table-responsive">
+                {# AFFICHAGE DE LA SEQUENCE MISE EN SITUATION #}
+                <table class="table bg-light border border-secondary">
+                    <h4 class="text-uppercase text-decoration-underline text-primary fw-bold">Séquence de mise en situation :</h4>
+                    <thead>
+                    <th>Nom de la séquence</th>
+                    <th>Lieu</th>
+                    <th>Outils</th>
+                    <th>Méthode</th>
+                    <th>Preuve</th>
+                    <th>Date de début</th>
+                    <th>Heure de début</th>
+                    <th>Date de Fin</th>
+                    <th>Heure de fin</th>
+                    </thead>
+                    <tbody>
+                    {# On boucle sur toutes les séquences de mise en situation #}
+                    {% if (parcour.miseEnSituations.count() > 0) %}
+                    {% for sequence in parcour.miseEnSituations %}
+                    <tr>
+                        <td>{{ sequence.nom}}</td>
+                        <td>{{ sequence.lieu}}</td>
+                        <td>{{ sequence.outils }}</td>
+                        <td>{{ sequence.methode }}</td>
+                        <td>{{ sequence.elementsPreuve }}</td>
+                        <td>{{ sequence.dateDebut.format("d/m/Y") }}</td>
+                        <td>{{ sequence.heureDebut.format("H:i") }}</td>
+                        <td>{{ sequence.dateFin.format("d/m/Y") }}</td>
+                        <td>{{ sequence.heureFin.format("H:i") }}</td>
+                    </tr>
+
+                    {# On boucle sur toute les taches #}
+                    <thead>
+                        <th>Taches total : <small>{{ sequence.taches.count() }}</small> </th>
+                    </thead>
+                    {%  for tache in sequence.taches %}
+                        <tbody>
+                            <td> . {{ tache.tache }}</td>
+                        </tbody>
+                    {%  endfor %}
+
+                    {# On boucle sur tout les resultat #}
+                    <thead>
+                        <th>Résultats total : <small>{{ sequence.resultats.count() }}</small> </th>
+                    </thead>
+                    {% for resultat in sequence.resultats%}
+                        <tbody>
+                            <td> . {{ resultat.resultat }}</td>
+                        </tbody>
+                    {% endfor%}
+
+                    {% endfor %} {# fin de la boucle de la sequence positionnement initial #}
+                    {% else %}
+                        <tr>
+                            <td class="colspan=5">Il n'y as pas de séquence inscrite.</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            <br>
+
+        {# AFFICHAGE DE LA SEQUENCE REFLEXIVE #}
+        <div class="table-responsive">
+            <table class="table bg-light border border-secondary">
+                <h4 class="text-uppercase text-decoration-underline text-primary fw-bold">Séquences réflexives :</h4>
+                <thead>
+                    <th>Nom de la séquence</th>
+                    <th>Date de début</th>
+                    <th>Heure de début</th>
+                    <th>Date de Fin</th>
+                    <th>Heure de fin</th>
+                </thead>
+                <tbody>
+                {% if (parcour.sequenceReflexives.count() > 0) %}
+                    {% for seq in parcour.sequenceReflexives %}
+                        <tr>
+                            <td>{{ seq.nom}}</td>
+                            <td>{{ seq.dateDebut.format("d/m/Y") }}</td>
+                            <td>{{ seq.heureDebut.format("H:i") }}</td>
+                            <td>{{ seq.dateFin.format("d/m/Y") }}</td>
+                            <td>{{ seq.heureFin.format("H:i") }}</td>
+                        </tr>
+
+                        {# On boucle sur narrer #}
+                        <th> <h5 class="text-decoration-underline text-primary">Niveau 1 : Décrire et Prendre conscience</h5></th>
+                        <thead>
+                             <th>Narrer/Décrire sa pratique: <small>{{ seq.narrers.count() }}</small> </th>
+                        </thead>
+                        {%  for narrer in seq.narrers %}
+                            <tbody>
+                                <td> . {{ narrer.narrer }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur questionner #}
+                        <thead>
+                             <th>Questionner: <small>{{ seq.questionners.count() }}</small> </th>
+                        </thead>
+                        {%  for questionner in seq.questionners %}
+                            <tbody>
+                                <td> . {{ questionner.questionner }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur conscience #}
+                        <thead>
+                            <th>Prendre Conscience: <small>{{ seq.consciences.count() }}</small> </th>
+                        </thead>
+                        {%  for conscience in seq.consciences %}
+                            <tbody>
+                                <td> . {{ conscience.conscience }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur difficulter #}
+                        <thead>
+                            <th>Pointer ses difficultés/ses problèmes: <small>{{ seq.difficulters.count() }}</small> </th>
+                        </thead>
+                        {%  for difficulter in seq.difficulters %}
+                            <tbody>
+                                <td> . {{ difficulter.difficulter }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur preference #}
+                         <th> <h5 class="text-decoration-underline text-primary">Niveau 2 : Prendre de la distance</h5></th>
+                        <thead>
+                             <th>Légitimer sa pratique selon une préférence: <small>{{ seq.preferences.count() }}</small> </th>
+                        </thead>
+                        {%  for preference in seq.preferences %}
+                            <tbody>
+                                <td> . {{ preference.preference }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur argcont #}
+                        <thead>
+                        <th>Légitimer sa pratique en fonction d'arguments contextuels : <small>{{ seq.argconts.count() }}</small> </th>
+                        </thead>
+                        {%  for argcont in seq.argconts %}
+                            <tbody>
+                                <td> . {{ argcont.argcont }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur argpro #}
+                        <thead>
+                        <th>Légitimer sa pratique en fonction d'arguments professionnels: <small>{{ seq.argpros.count() }}</small> </th>
+                        </thead>
+                        {%  for argpro in seq.argpros %}
+                            <tbody>
+                                <td> . {{ argpro.argpro }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur objectif #}
+                        <thead>
+                        <th>Établir un lien entre pratique et objectifs fixés : <small>{{ seq.objectifs.count() }}</small> </th>
+                        </thead>
+                        {%  for objectif in seq.objectifs %}
+                            <tbody>
+                                <td> . {{ objectif.objectif }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur pratique #}
+                        <thead>
+                            <th>Évaluer les effets de la pratique et les confronter aux attentes de formation: <small>{{ seq.pratiques.count() }}</small> </th>
+                        </thead>
+                        {%  for pratique in seq.pratiques %}
+                            <tbody>
+                                <td> . {{ pratique.pratique }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur diag #}
+                        <thead>
+                            <th>Diagnostiquer les choix pris dans la pratique :<small>{{ seq.diags.count() }}</small> </th>
+                        </thead>
+                        {%  for diag in seq.diags %}
+                            <tbody>
+                                <td> . {{ diag.diag }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur proposer #}
+                        <th> <h5 class="text-decoration-underline text-primary">Niveau 3 : Se tourner vers le futur</h5></th>
+                        <thead>
+                            <th>Proposer une ou des alternatives à sa pratique :<small>{{ seq.proposers.count() }}</small> </th>
+                        </thead>
+                        {%  for proposer in seq.proposers %}
+                            <tbody>
+                                <td> . {{ proposer.proposer }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur explorer #}
+                        <thead>
+                            <th>Explorer une ou des alternatives à sa pratique et choisir la plus adéquate :<small>{{ seq.explorers.count() }}</small> </th>
+                        </thead>
+                        {%  for explorer in seq.explorers %}
+                            <tbody>
+                                <td> . {{ explorer.explorer }}</td>
+                            </tbody>
+                        {%  endfor %}
+                        {# On boucle sur formuler #}
+                        <thead>
+                            <th>Formuler des règles utiles pour sa pratique future :<small>{{ seq.formulers.count() }}</small> </th>
+                        </thead>
+                        {%  for formuler in seq.formulers %}
+                            <tbody>
+                                <td> . {{ formuler.formuler }}</td>
+                            </tbody>
+                        {%  endfor %}
+
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="colspan=5">Il n'y as pas de séquence inscrite.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+
+             {# AFFICHAGE DE LA SEQUENCE COMPLEMENTAIRE #}
+        <div class="table-responsive">
+             <table class="table bg-light border border-secondary">
+                 <h4 class="text-uppercase text-decoration-underline text-primary fw-bold">Séquences complémentaires :</h4>
+                 <thead>
+                     <th>Nom de la séquence</th>
+                     <th>Préconisations</th>
+                     <th>Date de début</th>
+                     <th>Heure de début</th>
+                     <th>Date de Fin</th>
+                     <th>Heure de fin</th>
+                 </thead>
+
+                <tbody>
+                    {% if (parcour.scomplementaires.count() > 0) %}
+                        {% for sequ in parcour.scomplementaires %}
+                            <tr>
+                                <td>{{ sequ.nom}}</td>
+                                <td>{{ sequ.preconisations}}</td>
+                                <td>{{ sequ.dateDebut.format("d/m/Y") }}</td>
+                                <td>{{ sequ.heureDebut.format("H:i") }}</td>
+                                <td>{{ sequ.dateFin.format("d/m/Y") }}</td>
+                                <td>{{ sequ.heureFin.format("H:i") }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td class="colspan=5">Il n'y as pas de séquence inscrite.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+             </table>
+        </div>
+            <a href="{{ path('app_parcours_liste') }}" class="btn btn-info">Retour</a>
+
+    </div> <!--FIN DE CONTAINER -->
+
+{% endblock %}
+
+
+

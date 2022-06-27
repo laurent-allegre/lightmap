@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des parcours | lightmap {% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Gestion des parcours</h1>
+        <table class="table">
+            <thead>
+            <th>Id</th>
+            <th>Parcours</th>
+            <th>Entreprise</th>
+            <th>Apprenant</th>
+            <th>Poste</th>
+            <th>Actions</th>
+            </thead>
+            <tbody>
+            {# On boucle sur tous les parcours #}
+            {% for parcour in parcours %}
+                <tr>
+                    <td>{{ parcour.id}}</td>
+                    <td>{{ parcour.nomParcours}}</td>
+                    <td>{{ parcour.nomEntreprise}} </td>
+                    <td>{{ parcour.nomApprenant}}. {{ parcour.prenomApprenant }}</td>
+                    <td>{{ parcour.posteOccupe }}</td>
+                    <td><a href="{{ path('app_parcours_details', {'id': parcour.id }) }}" class="btn btn-info">Editer</a> | <a href="{{ path('app_parcours_modification', {'id': parcour.id }) }}" class="btn btn-primary">Modifier</a> |
+                        <a href="{{ path('app_sequence_liste', {'id': parcour.id }) }}" class="btn btn-success">+Séquence</a>|
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Supprimer
+                        </button>
+                    </td>
+                </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Suppression du parcours : {{ parcour.nomParcours}}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Etes vous sur de vouloir supprimer le parcours: {{ parcour.nomParcours}}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                                <a href="{{ path('delete', {'id': parcour.id }) }}"><button type="button" class="btn btn-danger">Valider la suppression </button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <tr>
+                    <td class="colspan=5">Il n'y as pas de parcours inscrit.</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_account') }}" class="btn btn-info">Retour</a>
+    </div>
+{% endblock %}
+
+
+

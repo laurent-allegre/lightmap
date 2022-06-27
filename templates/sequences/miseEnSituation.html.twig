@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} Séquences de mise en situation | LightMap  {% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="{{ asset('assets/images/logo1.png') }}" alt="logo de lightmap"/>
+                <h3 class="titreH3">LightMap</h3>
+                <p>Création d'une nouvelle séquence de mise en situation.</p>
+                <!-- Nom du parcours en cours -->
+                <div class="text-center my-2">
+                    <p class="parcoursh4"> <small>pour le parcours :</small>  "{{ parcours.nomParcours }}" | <br> <small>Nom de l'entreprise </small>"{{ parcours.nomEntreprise }}"</p>
+                </div>
+            </div>
+            <div class="col-md-9 register-right">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bonjour</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Création d'une nouvelle séquence de mise en situation :</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6 col-xl-10">
+                                <div class="form-group">
+                                    {{ form_label(form.nom) }}
+                                    {{ form_widget(form.nom) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.lieu) }}
+                                    {{ form_widget(form.lieu) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.outils) }}
+                                    {{ form_widget(form.outils) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.methode) }}
+                                    {{ form_widget(form.methode) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.elementsPreuve) }}
+                                    {{ form_widget(form.elementsPreuve) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.dateDebut) }}
+                                    {{ form_widget(form.dateDebut) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.heureDebut) }}
+                                    {{ form_widget(form.heureDebut) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.dateFin) }}
+                                    {{ form_widget(form.dateFin) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.heureFin) }}
+                                    {{ form_widget(form.heureFin) }}
+                                </div>
+
+                                <hr>
+                                <div class="form-group">
+                                    <p>Tâches confiées :</p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="taches-list"
+                                        data-index="{{ form.taches|length > 0 ? form.taches|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.taches.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary" data-collection-holder-class="taches-list">Ajouter une tâche</button>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="form-group">
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <p>Résultats attendus :</p>
+                                    <ul class="resultats-list"
+                                        data-index="{{ form.resultats|length > 0 ? form.resultats|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.resultats.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary" data-collection-holder-class="resultats-list">Ajouter un résultat</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="mt-3 text-center">
+                                    <input type="submit" class="btn btn-success"  value="Validation de la séquence"/>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    {{ form_end(form)}}
+
+
+    {% block javascripts %}
+        {# Ajout d'une ligne pre_requis #}
+        <script>
+            const addFormToCollection = (e) => {
+                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                const item = document.createElement('li');
+
+                item.innerHTML = collectionHolder
+                    .dataset
+                    .prototype
+                    .replace(
+                        /__name__/g,
+                        collectionHolder.dataset.index
+                    );
+
+                collectionHolder.appendChild(item);
+
+                collectionHolder.dataset.index++;
+
+                //  A refaire à chaque création
+                addTagFormDeleteLink(item);
+            };
+
+            document
+                .querySelectorAll('.add_item_link')
+                .forEach(btn => {
+                    btn.addEventListener("click", addFormToCollection)
+                });
+        </script>
+
+        {# Suppresion d'une ligne #}
+        <script>
+
+            const addTagFormDeleteLink = (item) => {
+                const removeFormButton = document.createElement('button');
+                removeFormButton.innerText = 'Annuler';
+
+                item.append(removeFormButton);
+
+                removeFormButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // remove the li for the tag form
+                    item.remove();
+                });
+            }
+        </script>
+    {% endblock %}
+{% endblock %}
+
+
+

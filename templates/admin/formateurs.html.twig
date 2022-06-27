@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des formateurs inscrits {% endblock %}
+
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Liste des formateurs inscrits</h1>
+        <table class="table">
+            <thead>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Actions</th>
+            </thead>
+            <tbody>
+            {# On boucle sur tous les formateurs inscrit #}
+            {% for formateur in formateurs %}
+                <tr>
+                    <td>{{ formateur.id}}</td>
+                    <td>{{ formateur.email}}</td>
+                    <td>
+                        {% for role in formateur.roles %}
+                            {% if role == "ROLE_USER"%}
+                                Utilisateur
+                            {% elseif role == "ROLE_FORMATEUR"%}
+                                Formateur
+                            {% elseif role == "ROLE_REFERENT" %}
+                                Référent
+                            {% elseif role == "ROLE_ADMIN"%}
+                                Administrateur
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ formateur.nom}}</td>
+                    <td>{{ formateur.prenom}}</td>
+                    <td><a href="{{ path('admin_modifier_formateurs', {'id': formateur.id }) }}" class="btn btn-warning">Modifier</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="colspan=5">Il n'y as pas de formateurs inscrit.</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('admin_app_admin') }}" class="btn btn-info">Retour</a>
+    </div>
+
+
+{% endblock %}
+
+
+

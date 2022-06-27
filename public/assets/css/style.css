@@ -1,0 +1,568 @@
+/*===========================
+    01.COMMON css
+===========================*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap");
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+.main {
+    min-height:100%;
+    position:relative;
+    padding-bottom: 1px;   /* Hauteur du pied de page */
+}
+#footer {
+    position:absolute;
+    bottom:0;  /* on le colle en bas */
+    width:100%;
+
+}
+
+
+body{
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #0e0e12;
+    overflow-x: hidden;
+    background: #F4F7FC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.titreH3{
+    color: #f1f2f3;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 400;
+    font-size: 3em;
+    text-shadow: 1px 2px 3px black;
+
+}
+
+
+.img-bg {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+/*===== All Button Style =====*/
+.theme-btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 18px 36px;
+    font-size: 18px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 5;
+    transition: all .4s ease-in-out;
+    border: none;
+    background: linear-gradient(to right, #34b15e 0%, #73e09a 50%, #34b15e 100%);
+    background-size: 200% auto;
+    overflow: hidden;
+}
+
+.theme-btn:hover, .theme-btn:focus {
+    background-position: right center;
+    color: #fff;
+}
+
+
+
+/*===========================
+    02.HEADER css
+===========================*/
+/*===== NAVBAR =====*/
+.navi-col {
+    background-image: linear-gradient(#365ae1 0%, #244ae2 4.66%, #1029a6 76.69%, #1029a6 100%);
+}
+.navbar-brand{
+    color: #f0f0f0 !important;
+    font-size: x-large;
+}
+.nav-link{
+    color: whitesmoke !important;
+}
+
+
+
+
+
+/*===========================
+    03.Hero-section CSS
+===========================*/
+.hero-section {
+    background-image: linear-gradient(#365ae1 0%, #244ae2 4.66%, #1029a6 76.69%, #1029a6 100%);
+    padding-top: 160px;
+    padding-bottom: 80px;
+    position: relative;
+    z-index: 1;
+    height: 1000px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .hero-section {
+        padding-top: 220px;
+        padding-bottom: 180px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .hero-section {
+        padding-top: 210px;
+        padding-bottom: 180px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .hero-section {
+        padding-top: 210px;
+        padding-bottom: 130px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section {
+        padding-top: 150px;
+        padding-bottom: 130px;
+    }
+}
+
+.hero-section .hero-content-wrapper h1 {
+    line-height: 82px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .hero-section .hero-content-wrapper h1 {
+        line-height: 70px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .hero-section .hero-content-wrapper h1 {
+        line-height: 55px;
+        font-size: 39px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .hero-section .hero-content-wrapper h1 {
+        line-height: 65px;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .hero-section .hero-content-wrapper h1 {
+        line-height: 65px;
+        font-size: 45px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section .hero-content-wrapper h1 {
+        line-height: 50px;
+        font-size: 36px;
+    }
+}
+
+.hero-section .hero-content-wrapper p {
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .hero-section .hero-img img {
+        width: 110%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .hero-section .hero-img img {
+        width: 120%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .hero-section .hero-img img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section .hero-img img {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .hero-section .hero-img {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section .hero-img {
+        margin-top: 50px;
+    }
+}
+
+.hero-section .shapes .shape {
+    position: absolute;
+    width: 970px;
+    height: 540px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 73px;
+    z-index: -1;
+    transform: rotate(-26deg);
+}
+
+.hero-section .shapes .shape-1 {
+    top: -344px;
+    left: -124px;
+}
+
+.hero-section .shapes .shape-2 {
+    bottom: 0;
+    left: -224px;
+}
+
+.hero-section .shapes .shape-3 {
+    top: -393px;
+    left: 540px;
+}
+
+/*===========================
+    3.footer css
+===========================*/
+
+.footer .footer-widget p {
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .footer .footer-widget .footer-social-links ul li a {
+        padding: 0 7px;
+        margin-right: 10px;
+    }
+}
+
+.footer .footer-widget .footer-social-links ul li a:hover {
+    background: white;
+    color: #365ae1;
+}
+
+.footer .copyright-area {
+    border-top: 2px solid rgba(255, 255, 255, 0.35);
+    padding: 30px 0;
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .footer .copyright-area p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .footer .copyright-area p {
+        font-size: 15px;
+    }
+}
+
+.footer .copyright-area p a {
+    color: #fff;
+}
+
+.footer .copyright-area p a:hover {
+    color: #84E4A4;
+}
+
+
+
+/*===========================
+    6.Cards circulaires de la  page mon compte
+===========================*/
+
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+
+.parcoursh1 {
+    text-align: center;
+    color: #1029a6;
+    font-family: 'arial', sans-serif;
+    font-size: 3em;
+}
+.parcoursh2 {
+    text-align: center;
+    color: #440CE0;
+    font-family: 'arial', sans-serif;
+    font-size: 2em;
+}
+
+.parcoursh3 {
+    text-align: center;
+    color: #440CE0;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 600;
+    font-size: 1.4em;
+}
+
+.parcoursh4 {
+    text-align: center;
+    color: #f1f2f3;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 400;
+    font-size: 1.4em;
+}
+
+.cardsParcours {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.imgButton {
+    position: relative;
+}
+
+.imgButton img {
+    transform: translateY(0);
+    transition: all .4s ease-out;
+    border: .5em solid #E89C0C;
+    -webkit-box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, .3);
+    -moz-box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, .3);
+    box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, .3);
+}
+
+.one:before {
+    content: 'Ajouter un parcours !'
+}
+
+.two:before {
+    content: 'Liste des parcours !'
+}
+
+.three:before {
+    content: 'Modifier un parcours !'
+}
+
+.four:before {
+    content: "Modifier le rôle d'un formateur";
+}
+.five:before {
+    content: "Positionnement initial";
+}
+.six:before {
+    content: "Mise en situation";
+}
+.seven:before {
+    content: "Séquence réflexive";
+}
+.eight:before {
+    content: "Séquence complèmentaire";
+}
+
+.imgButton:before {
+    position: absolute;
+    padding: 15px 20px;
+    left: -40px;
+    bottom: -9px;
+    font-size: 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #7107E9;
+    background: #ffffff;
+    transition: all .4s ease-out;
+    transform: translateY(150px);
+    opacity: 0;
+    z-index: 1;
+    border-radius: 100px;
+    font-weight: normal;
+    border: .2em solid #E89C0C;
+    -webkit-box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, .5);
+    box-shadow: 8px 7px 5px 0px rgba(0, 0, 0, .5);
+}
+
+.imgButton:hover:before {
+    bottom: 45px;
+    opacity: 100;
+}
+
+.imgButton:hover img {
+    transform: translateY(-10px);
+}
+
+.floatButton {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.floatButton:hover,
+.floatButton:focus,
+.floatButton:active {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+}
+
+/*===========================
+    7. FORMULAIRE D'INSCRIPTION
+===========================*/
+.register{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    margin-top: 3%;
+    padding: 3%;
+}
+.register-left{
+    text-align: center;
+    color: #fff;
+    margin-top: 4%;
+}
+.register-left input{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-top: 30%;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+.register-right{
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+.register-left img{
+    margin-top: 15%;
+    margin-bottom: 5%;
+    width: 25%;
+    -webkit-animation: mover 2s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+.register-left p{
+    font-weight: lighter;
+    padding: 12%;
+    margin-top: -9%;
+}
+.register .register-form{
+    padding: 10%;
+    margin-top: 10%;
+}
+.btnRegister{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+.register .nav-tabs{
+    margin-top: 3%;
+    border: none;
+    background: #0062cc;
+    border-radius: 1.5rem;
+    width: 28%;
+    float: right;
+}
+.register .nav-tabs .nav-link{
+    padding: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.register .nav-tabs .nav-link:hover{
+    border: none;
+}
+.register .nav-tabs .nav-link.active{
+    width: 100px;
+    color: #0062cc;
+    border: 2px solid #0062cc;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+.register-heading{
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
+    color: #101255;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 400;
+    font-size: 1.8em;
+    text-shadow: 1px 2px 3px grey;
+}
+
+/*===========================
+    7. FORMULAIRE DE CONNEXION
+===========================*/
+
+
+.login {
+    min-height: 110vh;
+}
+
+.bg-image {
+    background-image: url('../images/padlock.png');
+    background-size: cover;
+    background-position: center;
+
+}
+
+.login-heading {
+    font-weight: 300;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
+
+
+
+
+

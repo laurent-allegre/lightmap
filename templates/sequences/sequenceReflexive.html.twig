@@ -1,0 +1,309 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Séquences réflexives | LightMap {% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="container-fluid register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="{{ asset('assets/images/logo1.png') }}" alt="logo de lightmap"/>
+                <h3 class="titreH3">LightMap</h3>
+                <p>Création d'une nouvelle séquence réflexive.</p>
+                <!-- Nom du parcours en cours -->
+                <div class="text-center my-2">
+                    <p class="parcoursh4"> <small>pour le parcours :</small>  "{{ parcours.nomParcours }}" | <br> <small>Nom de l'entreprise </small>"{{ parcours.nomEntreprise }}"</p>
+                </div>
+            </div>
+            <div class="col-md-9 register-right">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bonjour</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading titreH3">Création d'une séquence réflexive:</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6 col-xl-10">
+                                <div class="form-group">
+                                    {{ form_label(form.nom) }}
+                                    {{ form_widget(form.nom) }}
+                                    <p> <small> NB : Il s'agit ici de préparer les questions qui seront de base à la mise en place de la réflexivité dans la mise en situation de l'apprenant. La méthode développée ci-dessous est adaptée des travaux de Antoine DEROBERTMASURE, en 2012.</small></p>
+                                </div>
+
+                                <h4>Niveau 1 : Décrire et Prendre conscience</h4> <br>
+                                <!-- AFFICHAGE DU CHAMP NARRER -->
+                                <div class="form-group">
+                                    <p>+ Narrer / Décrire sa pratique :</p>
+                                    <p><small>exemple : "Pouvez-vous me décrire les tâches que vous devez réaliser ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="narrers-list"
+                                        data-index="{{ form.narrers|length > 0 ? form.narrers|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.narrers.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="narrers-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP QUESTIONNER -->
+                                <div class="form-group">
+                                    <p>+ Questionner :</p>
+                                    <p><small>exemple : "Avez-vous des doutes sur l'intérêt des tâches que vous devez réaliser ?""</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="questionners-list"
+                                        data-index="{{ form.questionners|length > 0 ? form.questionners|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.questionners.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="questionners-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP CONSCIENCE -->
+                                <div class="form-group">
+                                    <p>+ Prendre Conscience :</p>
+                                    <p><small>exemple : "Quel est votre ressenti sur la mise en situation que vous venez d'appliquer ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="consciences-list"
+                                        data-index="{{ form.consciences|length > 0 ? form.consciences|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.consciences.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="consciences-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP DIFFICULTER -->
+                                <div class="form-group">
+                                    <p>+ Pointer ses difficultés/ses problèmes :</p>
+                                    <p><small>exemple : "Quelles difficultés avez-vous rencontrées pendant cette situation ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="difficulters-list"
+                                        data-index="{{ form.difficulters|length > 0 ? form.difficulters|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.difficulters.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="difficulters-list">+</button>
+                                    </div>
+                                </div>
+                                  <hr style="height:2px; width:50%; border-width:0; color:red; background-color:blue">
+                                    <h4>Niveau 2 : Prendre de la distance</h4> <br>
+                                <!-- AFFICHAGE DU CHAMP PREFERENCE -->
+                                <div class="form-group">
+                                    <p>+ Légitimer sa pratique selon une préférence, une tradition :</p>
+                                    <p><small>exemple : "Avez-vous modifié ou adapté certaines tâches en fonction de ce que vous avez l'habitude de faire ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="preferences-list"
+                                        data-index="{{ form.preferences|length > 0 ? form.preferences|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.preferences.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="preferences-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP ARGCONT -->
+                                <div class="form-group">
+                                    <p>+ Légitimer sa pratique en fonction d'arguments contextuels :</p>
+                                    <p><small>exemple : "S'est-il passé quelque chose qui vous a forcé à procéder différemment que ce qui était initialement prévu ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="argconts-list"
+                                        data-index="{{ form.argconts|length > 0 ? form.argconts|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.argconts.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="argconts-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP ARGPRO -->
+                                <div class="form-group">
+                                    <p>+ Légitimer sa pratique en fonction d'arguments professionnels ou réglementaires :</p>
+                                    <p><small>exemple : "Y a-t-il des tâches que vous avez adaptées parce que l'entreprise (ou son règlement) ne procède pas ainsi ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="argpros-list"
+                                        data-index="{{ form.argpros|length > 0 ? form.argpros|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.argpros.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="argpros-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP OBJECTIF -->
+                                <div class="form-group">
+                                    <p>+ Établir un lien entre pratique et objectifs fixés :</p>
+                                    <p><small>exemple : "Quel était votre but en procédant de cette manière ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="objectifs-list"
+                                        data-index="{{ form.objectifs|length > 0 ? form.objectifs|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.objectifs.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="objectifs-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP PRATIQUE -->
+                                <div class="form-group">
+                                    <p>+ Évaluer les effets de la pratique et les confronter aux attentes de formation :</p>
+                                    <p><small>exemple : "Observez-vous un décalage entre votre façon de procéder et ce qui est attendu ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="pratiques-list"
+                                        data-index="{{ form.pratiques|length > 0 ? form.pratiques|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.pratiques.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="pratiques-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP DIAG -->
+                                <div class="form-group">
+                                    <p>+ Diagnostiquer les choix pris dans la pratique :</p>
+                                    <p><small>exemple : "Observez-vous un décalage entre votre façon de procéder et ce qui est attendu ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="diags-list"
+                                        data-index="{{ form.diags|length > 0 ? form.diags|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.diags.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="diags-list">+</button>
+                                    </div>
+                                </div>
+                                <hr style="height:2px; width:50%; border-width:0; color:red; background-color:blue">
+                                <h4>Niveau 3 : Se tourner vers le futur</h4> <br>
+                                <!-- AFFICHAGE DU CHAMP PROPOSER -->
+                                <div class="form-group">
+                                    <p>+ Diagnostiquer les choix pris dans la pratique :</p>
+                                    <p><small>exemple : "Observez-vous un décalage entre votre façon de procéder et ce qui est attendu ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="proposers-list"
+                                        data-index="{{ form.proposers|length > 0 ? form.proposers|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.proposers.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="proposers-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP EXPLORER -->
+                                <div class="form-group">
+                                    <p>+ Explorer une ou des alternatives à sa pratique et choisir la plus adéquate :</p>
+                                    <p><small>exemple : "Parmi les alternatives que vous m'avez citées, laquelle vous semble la plus adéquate ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="explorers-list"
+                                        data-index="{{ form.explorers|length > 0 ? form.explorers|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.explorers.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="explorers-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- AFFICHAGE DU CHAMP FORMULER -->
+                                <div class="form-group">
+                                    <p>+ Formuler des règles utiles pour sa pratique future :</p>
+                                    <p><small>exemple : "Quelles règles pourriez-vous établir afin d'améliorer la réalisation de cet objectif la prochaine fois ?"</small></p>
+                                    {# l'attribut data-index est requis pour le code JavaScript ci-dessous #}
+                                    <ul class="formulers-list"
+                                        data-index="{{ form.formulers|length > 0 ? form.formulers|last.vars.name + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(form.formulers.vars.prototype)|e('html_attr') }}"
+                                    ></ul>
+                                    <div class="text-end">
+                                        <button type="button" class="add_item_link btn btn-primary btn-sm" data-collection-holder-class="formulers-list">+</button>
+                                    </div>
+                                </div>
+                                <hr>
+
+
+                                <div class="form-group">
+                                    {{ form_label(form.dateDebut) }}
+                                    {{ form_widget(form.dateDebut) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.heureDebut) }}
+                                    {{ form_widget(form.heureDebut) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.dateFin) }}
+                                    {{ form_widget(form.dateFin) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.heureFin) }}
+                                    {{ form_widget(form.heureFin) }}
+                                </div>
+
+
+                                <div class="mt-3 text-center">
+                                    <input type="submit" class="btn btn-success"  value="Validation de la séquence"/>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    {{ form_end(form)}}
+
+    {% block javascripts %}
+        {# Ajout d'une ligne pre_requis #}
+        <script>
+            const addFormToCollection = (e) => {
+                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                const item = document.createElement('li');
+
+                item.innerHTML = collectionHolder
+                    .dataset
+                    .prototype
+                    .replace(
+                        /__name__/g,
+                        collectionHolder.dataset.index
+                    );
+
+                collectionHolder.appendChild(item);
+
+                collectionHolder.dataset.index++;
+
+                //  A refaire à chaque création
+                addTagFormDeleteLink(item);
+            };
+
+            document
+                .querySelectorAll('.add_item_link')
+                .forEach(btn => {
+                    btn.addEventListener("click", addFormToCollection)
+                });
+        </script>
+
+        {# Suppresion d'une ligne #}
+        <script>
+
+            const addTagFormDeleteLink = (item) => {
+                const removeFormButton = document.createElement('button');
+                removeFormButton.innerText = 'Annuler';
+
+                item.append(removeFormButton);
+
+                removeFormButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // remove the li for the tag form
+                    item.remove();
+                });
+            }
+        </script>
+    {% endblock %}
+
+{% endblock %}
+
+
+

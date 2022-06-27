@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!--  ========================= hero-section start =========================  -->
+    <section id="home" class="hero-section">
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-7">
+                    <div class="hero-content-wrapper">
+                        <h1 class="text-white display-2">Light Map</h1>
+                        <p class="text-white">Illuminons vos parcours . Avec l'application LightMap, Concevez simplement vos AFEST et concentrez vous sur l’essentiel.</p>
+                        <a href="{{path('app_account')}}" class="theme-btn" >Connexion</a>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-5">
+                    <div class="hero-img">
+                        <img src="{{asset('assets/images/logo.png')}}" alt="logo lightmap">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========================= hero-section end ========================= -->
+
+{% endblock %}

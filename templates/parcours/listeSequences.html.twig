@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des séquences | Lightmap{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1 class="parcoursh1 display-1">Gestion des Séquences  ! </h1>
+
+        <!-- Nom du parcours en cours -->
+        <div class="text-center my-4">
+          <h4 class="parcoursh3"> <small>parcours sélectionner :</small>  "{{ parcours.nomParcours }}" | <small>Nom de l'entreprise :</small>"{{ parcours.nomEntreprise }}"</h4>
+        </div>
+
+        <hr>
+        <!-- Trois colonnes pour afficher les actions diponibles -->
+        <div class="row p-2">
+            <div class="col-lg-3 cardsParcours">
+                <a target="_self" href="{{path('app_sequence_initial',{'id': parcours.id }) }}" class="imgButton five">
+                    <img src="{{ asset('assets/images/sequence.png') }}" class="rounded-circle" alt="Logo séquence position initial" width="250" height="250" alt="séquence position initial"></a>
+                <h3 class="parcoursh3">Position initial</h3>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-3 cardsParcours">
+                <a target="_self" href="{{path('app_sequence_mise_en_situation',{'id': parcours.id }) }}" class="imgButton six">
+                    <img class="rounded-circle" src="{{ asset('assets/images/sequence1.png') }}" alt="Logo séquence mise en situation" width="250" height="250" alt="séquence mise en situation"></a>
+                <h3 class="parcoursh3">Mise en situation</h3>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-3 cardsParcours">
+                <a target="_self" href="{{path('app_sequence_reflexive',{'id': parcours.id }) }}" class="imgButton seven">
+                    <img class="rounded-circle" src="{{ asset('assets/images/sequence2.png') }}" alt="Logo séquence réflexive" width="250" height="250" alt="séquence réflexive"></a>
+                <h3 class="parcoursh3">Séquence réflexive</h3>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-3 cardsParcours">
+                <a target="_self" href="{{path('app_sequences_complementaire',{'id': parcours.id }) }}" class="imgButton eight">
+                    <img class="rounded-circle" src="{{ asset('assets/images/sequence3.png') }}" alt="Logo séquence complémentaire" width="250" height="250" alt="séquence complémentaire"></a>
+                <h3 class="parcoursh3">Séquence complementaire</h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+{% endblock %}
+
+
+
